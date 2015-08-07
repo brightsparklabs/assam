@@ -37,9 +37,9 @@ dependencies {
 // PROJECT IDENTIFICATION
 // -----------------------------------------------------------------------------
 
-project.description = '{{TBC}}'
-project.ext.url = 'https://bitbucket.org/brightsparklabs/{{TBC}}'
-project.ext.scm = 'scm:git@bitbucket.org:brightsparklabs/{{TBC}}.git'
+project.description = 'Interfaces for modelling Abstract Syntax Notation (ASN.1)'
+project.ext.url = 'git@github.com:brightsparklabs/assam.git'
+project.ext.scm = 'scm:git@github.com:brightsparklabs/assam.git'
 project.group = 'com.brightsparklabs'
 project.version = getVersion()
 
