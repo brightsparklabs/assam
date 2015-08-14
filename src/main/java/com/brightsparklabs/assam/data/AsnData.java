@@ -6,6 +6,7 @@
 package com.brightsparklabs.assam.data;
 
 import com.brightsparklabs.assam.exception.DecodeException;
+import com.brightsparklabs.assam.schema.AsnPrimitiveType;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -22,6 +23,17 @@ public interface AsnData
     // -------------------------------------------------------------------------
     // PUBLIC METHODS
     // -------------------------------------------------------------------------
+
+    /**
+     * Returns the {@link AsnPrimitiveType} of the specified tag
+     *
+     * @param tag
+     *         tag to retrieve the type of
+     *
+     * @return the {@link AsnPrimitiveType} of the specified tag or  or {@code Optional.absent()} if
+     * the tag does not exist in this data.
+     */
+    Optional<AsnPrimitiveType> getPrimitiveType(String tag);
 
     /**
      * Returns all tags found in the ASN data as a set of XPath like strings. E.g.
