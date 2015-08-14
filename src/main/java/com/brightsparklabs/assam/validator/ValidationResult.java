@@ -10,13 +10,10 @@ import com.google.common.collect.ImmutableSet;
 /**
  * Contains the results from running a {@link Validator} over {@link AsnData}.
  *
- * @param <T>
- *         the type of validation failures contained in this result
- *
  * @author brightSPARK Labs
  */
 
-public interface ValidationResult<T extends ValidationFailure>
+public interface ValidationResult
 {
     // -------------------------------------------------------------------------
     // PUBLIC METHODS
@@ -45,7 +42,7 @@ public interface ValidationResult<T extends ValidationFailure>
      *
      * @return all failures that occurred during validation
      */
-    ImmutableSet<T> getFailures();
+    ImmutableSet<ValidationFailure> getFailures();
 
     /**
      * Returns all failures that occurred validating the specified tag
@@ -55,5 +52,5 @@ public interface ValidationResult<T extends ValidationFailure>
      *
      * @return all failures that occurred validating the specified tag
      */
-    ImmutableSet<T> getFailures(String tag);
+    ImmutableSet<ValidationFailure> getFailures(String tag);
 }

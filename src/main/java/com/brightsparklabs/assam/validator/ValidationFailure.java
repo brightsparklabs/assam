@@ -28,4 +28,11 @@ public interface ValidationFailure
      * @return a string describing why the validation failure occurred
      */
     String getFailureReason();
+
+    /**
+     * Returns the name of the tag the validation failure occurred on
+     *
+     * @return the name of the tag the validation failure occurred to
+     */
+    String getFailureTag();
 }
