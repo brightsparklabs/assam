@@ -5,6 +5,7 @@
 package com.brightsparklabs.assam.validator;
 
 import com.brightsparklabs.assam.data.AsnData;
+import com.brightsparklabs.assam.exception.DecodeException;
 import com.google.common.collect.ImmutableSet;
 
 /**
@@ -35,7 +36,7 @@ public interface ValidationRule
      *
      * @return the results of validation
      */
-    ImmutableSet<ValidationFailure> validate(String tag, AsnData asnData);
+    ImmutableSet<ValidationFailure> validate(String tag, AsnData asnData) throws DecodeException;
 
     // -------------------------------------------------------------------------
     // INTERNAL CLASS: NULL

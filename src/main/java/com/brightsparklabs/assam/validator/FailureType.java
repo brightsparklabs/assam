@@ -19,6 +19,8 @@ public enum FailureType
     MandatoryFieldMissing,
     /** data does not conform to an ASN.1 schema constraint */
     SchemaConstraint,
+    /** failed a custom validation rule */
+    CustomValidationFailed,
     /** could not decode raw tag against schema */
     UnknownTag
 }
