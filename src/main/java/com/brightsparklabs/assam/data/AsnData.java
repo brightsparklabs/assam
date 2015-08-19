@@ -63,6 +63,16 @@ public interface AsnData
     boolean contains(String tag);
 
     /**
+     * Determines whether the data contains any tags matching the supplied regular expression
+     *
+     * @param regex
+     *         regular expression to match tags against
+     *
+     * @return {@code true} if the tag is in the data; {@code false} otherwise
+     */
+    boolean contains(Pattern regex);
+
+    /**
      * Gets the data (bytes) associated with the specified tag.
      *
      * <p>Note that because this method is returning unprocessed bytes it will provide results for
