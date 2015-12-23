@@ -35,6 +35,8 @@ public interface ValidationRule
      *         data to validate
      *
      * @return the results of validation
+     *
+     * @throws DecodeException if the specified tag could not be decoded.
      */
     ImmutableSet<ValidationFailure> validate(String tag, AsnData asnData) throws DecodeException;
 
