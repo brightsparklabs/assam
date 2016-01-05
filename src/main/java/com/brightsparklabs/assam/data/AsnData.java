@@ -169,6 +169,9 @@ public interface AsnData
      * @return data associated with the specified tag or {@code Optional.absent()} if the tag does
      * not exist
      *
+     * <p>Note: this method will be deprecated in a future release. Use {@link
+     * #getDecodedObject(String, Class)} instead</p>
+     *
      * <p>Note: There is no inherit type safety with this method.  The type of object returned will
      * match the tag.  If the caller mis-aligns the return type with the actual type dictated by the
      * schema then on result.get() (from the returned optional) a ClassCastException will likely be
@@ -258,6 +261,110 @@ public interface AsnData
      *         if any errors occur decoding the data associated with the tag
      */
     <T> Optional<T> getDecodedObject(String tag) throws DecodeException;
+
+    /**
+     * Gets the data associated with the specified tag.
+     *
+     * <p>Note that because this method needs to process the bytes in a way that requires knowing
+     * the tags' type it will only return results for fully decoded tags</p>
+     *
+     * @param tag
+     *         tag associated with the data
+     * @param classOfT
+     *         the class of data that is expected for this tag
+     * @param <T>
+     *         the type of data that will be returned in the {@link Optional}
+     *
+     * @return data associated with the specified tag or {@code Optional.absent()} if the tag does
+     * not exist
+     *
+     * <p>The expected Java object type for each ASN.1 schema type is:</p>
+     *
+     * <ul>
+     *
+     * <li><b>BitString</b>: String</li>
+     *
+     * <li><b>BmpString</b>: String</li>
+     *
+     * <li><b>Boolean</b>: boolean</li>
+     *
+     * <li><b>CharacterString</b>: String</li>
+     *
+     * <li><b>Date</b>: Timestamp</li>
+     *
+     * <li><b>DateTime</b>: Timestamp</li>
+     *
+     * <li><b>Duration</b>: String</li>
+     *
+     * <li><b>EmbeddedPDV</b>: String</li>
+     *
+     * <li><b>Enumerated</b>: String</li>
+     *
+     * <li><b>External</b>: String</li>
+     *
+     * <li><b>GeneralizedTime</b>: Timestamp</li>
+     *
+     * <li><b>GeneralString</b>: String</li>
+     *
+     * <li><b>GraphicString</b>: String</li>
+     *
+     * <li><b>Ia5String</b>: String</li>
+     *
+     * <li><b>InstanceOf</b>: String</li>
+     *
+     * <li><b>Integer</b>: BigInteger</li>
+     *
+     * <li><b>Iri</b>: String</li>
+     *
+     * <li><b>Iso646String</b>: String</li>
+     *
+     * <li><b>Null</b>: String</li>
+     *
+     * <li><b>NumericString</b>: String</li>
+     *
+     * <li><b>ObjectClassField</b>: String</li>
+     *
+     * <li><b>OctetString</b>: byte[]</li>
+     *
+     * <li><b>Oid</b>: String</li>
+     *
+     * <li><b>OidIri</b>: String</li>
+     *
+     * <li><b>Prefixed</b>: String</li>
+     *
+     * <li><b>PrintableString</b>: String</li>
+     *
+     * <li><b>Real</b>: String</li>
+     *
+     * <li><b>RelativeIri</b>: String</li>
+     *
+     * <li><b>RelativeOid</b>: String</li>
+     *
+     * <li><b>RelativeOidIri</b>: String</li>
+     *
+     * <li><b>TeletexString</b>: String</li>
+     *
+     * <li><b>Time</b>: Timestamp</li>
+     *
+     * <li><b>TimeOfDay</b>: Timestamp</li>
+     *
+     * <li><b>UniversalString</b>: String</li>
+     *
+     * <li><b>Utf8String</b>: String</li>
+     *
+     * <li><b>VideotexString</b>: String</li>
+     *
+     * <li><b>VisibleString</b>: String</li>
+     *
+     * </ul>
+     *
+     * @throws DecodeException
+     *         if any errors occur decoding the data associated with the tag
+     * @throws ClassCastException
+     *         if the type of the tag does not match T
+     */
+    <T> Optional<T> getDecodedObject(String tag, Class<T> classOfT)
+            throws DecodeException, ClassCastException;
 
     /**
      * Gets the data from all tags matching the supplied regular expression as the decoded Java
