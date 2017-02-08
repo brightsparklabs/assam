@@ -7,10 +7,10 @@ package com.brightsparklabs.assam.data;
 
 import com.brightsparklabs.assam.exception.DecodeException;
 import com.brightsparklabs.assam.schema.AsnPrimitiveType;
-import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 /**
