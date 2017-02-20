@@ -7,10 +7,10 @@ package com.brightsparklabs.assam.data;
 
 import com.brightsparklabs.assam.exception.DecodeException;
 import com.brightsparklabs.assam.schema.AsnPrimitiveType;
-import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 /**
@@ -259,6 +259,8 @@ public interface AsnData
      *
      * @throws DecodeException
      *         if any errors occur decoding the data associated with the tag
+     * @deprecated please use the other overload - {@link #getDecodedObject(String, Class)} for
+     * better type safety.
      */
     <T> Optional<T> getDecodedObject(String tag) throws DecodeException;
 
