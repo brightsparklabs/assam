@@ -25,12 +25,13 @@ repositories {
 }
 
 dependencies {
-    compile 'com.google.guava:guava:18.0'
-    compile 'org.slf4j:slf4j-api:1.7.10'
+    compile "com.google.guava:guava:21.0"
+    def slf4jVersion = "1.7.23"
+    compile "org.slf4j:slf4j-api:${slf4jVersion}"
 
-    testCompile 'junit:junit:4.12'
+    testCompile "junit:junit:4.12"
 
-    runtime 'org.slf4j:slf4j-log4j12:1.7.10'
+    runtime "org.slf4j:slf4j-log4j12:${slf4jVersion}"
 }
 
 // -----------------------------------------------------------------------------
@@ -81,7 +82,7 @@ tasks.withType(FindBugs) {
         xml.enabled = false
         html.enabled = true
     }
- }
+}
 
 // -----------------------------------------------------------------------------
 // GENERATE CODE COVERAGE REPORT (via jacoco)
