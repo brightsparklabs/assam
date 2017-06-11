@@ -102,10 +102,13 @@ public interface AsnData
      * <p>Note that because this method is returning unprocessed bytes it will provide results for
      * partially matched tags as well as "raw" tags</p>
      *
+     * The sting will <b>not</b> be prepended with "0x", as this function is implicitly returning a
+     * hex string, using the uppercase alphabet, eg "0A12DF".
+     *
      * @param tag
      *         tag associated with the data
      *
-     * @return data associated with the specified tag (e.g. {@code "0x010203"}) or {@code
+     * @return data associated with the specified tag (e.g. {@code "010203"}) or {@code
      * Optional.absent()} if the tag does not exist
      */
     Optional<String> getHexString(String tag);
