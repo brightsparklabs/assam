@@ -389,12 +389,12 @@ public interface AsnData
     ImmutableMap<String, Object> getDecodedObjectsMatching(Pattern regex) throws DecodeException;
 
     /**
-     * Returns all the tags matching the supplied regular expression
+     * Returns all tags which match the supplied regular expression
      *
      * @param regex
-     *         regular expression to match tags against
+     *         regular expression to test tag names against
      *
-     * @return the tags that match the supplied regular expression
+     * @return all tags which match the supplied regular expression
      */
     ImmutableSet<String> getMatchingTags(Pattern regex);
 }
