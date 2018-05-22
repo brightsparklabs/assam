@@ -387,4 +387,14 @@ public interface AsnData
      *         if any errors occur decoding the data associated with the tags
      */
     ImmutableMap<String, Object> getDecodedObjectsMatching(Pattern regex) throws DecodeException;
+
+    /**
+     * Returns all the tags matching the supplied regular expression
+     *
+     * @param regex
+     *         regular expression to match tags against
+     *
+     * @return the tags that match the supplied regular expression
+     */
+    ImmutableSet<String> getMatchingTags(Pattern regex);
 }
