@@ -45,6 +45,16 @@ public interface AsnData
     ImmutableSet<String> getTags();
 
     /**
+     * Returns all tags which match the supplied regular expression
+     *
+     * @param regex
+     *         regular expression to match tags against
+     *
+     * @return all tags which match the supplied regular expression
+     */
+    ImmutableSet<String> getTagsMatching(Pattern regex);
+
+    /**
      * Returns the tags from the data which could not be mapped using the schema. E.g.
      * "/Document/body/content/99", "/Document/0[99]/0[1]/0[1]"
      *
