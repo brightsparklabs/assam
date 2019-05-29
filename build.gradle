@@ -25,8 +25,8 @@ repositories {
 }
 
 dependencies {
-    compile "com.google.guava:guava:27.0-jre"
-    def slf4jVersion = "1.7.25"
+    compile "com.google.guava:guava:27.1-jre"
+    def slf4jVersion = "1.7.26"
     compile "org.slf4j:slf4j-api:${slf4jVersion}"
 
     testCompile "junit:junit:4.12"
