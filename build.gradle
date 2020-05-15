@@ -21,7 +21,7 @@ plugins {
     id 'groovy'
 
     // Apply bintray plugin for publishing artifacts
-    id "com.jfrog.bintray" version "1.8.4"
+    id "com.jfrog.bintray" version "1.8.5"
     id "maven-publish"
 }
 
@@ -34,13 +34,16 @@ repositories {
 }
 
 dependencies {
-    implementation "com.google.guava:guava:27.1-jre"
-    def slf4jVersion = "1.7.26"
-    implementation "org.slf4j:slf4j-api:${slf4jVersion}"
+    def versions = [
+        slf4j: "1.7.30"
+    ]
 
-    testImplementation "junit:junit:4.12"
+    implementation "com.google.guava:guava:29.0-jre"
+    implementation "org.slf4j:slf4j-api:${versions.slf4j}"
 
-    runtimeOnly "org.slf4j:slf4j-log4j12:${slf4jVersion}"
+    testImplementation "junit:junit:4.13"
+
+    runtimeOnly "org.slf4j:slf4j-log4j12:${versions.slf4j}"
 }
 
 // -----------------------------------------------------------------------------
