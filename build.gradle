@@ -7,31 +7,40 @@
 // PLUGINS
 // -----------------------------------------------------------------------------
 
-apply plugin: 'java'
-apply plugin: 'java-library-distribution'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
-apply plugin: 'findbugs'    // code quality
-apply plugin: 'jacoco'      // code coverage
-apply plugin: 'maven'       // publishing to maven central
-apply plugin: 'signing'     // publishing to maven central
+plugins {
+    // Apply the brightSPARK Labs plugin for standardisation
+    id 'com.brightsparklabs.gradle.baseline' version "0.1.1"
+
+    // Apply the java plugin to add support for Java
+    id 'java'
+
+    // Apply the library plugin to add support for building a library
+    id 'java-library-distribution'
+
+    // Apply the groovy plugin to also add support for Groovy (needed for Spock)
+    id 'groovy'
+
+    // Apply bintray plugin for publishing artifacts
+    id "com.jfrog.bintray" version "1.8.4"
+    id "maven-publish"
+}
 
 // -----------------------------------------------------------------------------
 // REPOSITORIES/DEPENDENCIES
 // -----------------------------------------------------------------------------
 
 repositories {
-    mavenCentral()
+    jcenter()
 }
 
 dependencies {
-    compile "com.google.guava:guava:27.1-jre"
+    implementation "com.google.guava:guava:27.1-jre"
     def slf4jVersion = "1.7.26"
-    compile "org.slf4j:slf4j-api:${slf4jVersion}"
+    implementation "org.slf4j:slf4j-api:${slf4jVersion}"
 
-    testCompile "junit:junit:4.12"
+    testImplementation "junit:junit:4.12"
 
-    runtime "org.slf4j:slf4j-log4j12:${slf4jVersion}"
+    runtimeOnly "org.slf4j:slf4j-log4j12:${slf4jVersion}"
 }
 
 // -----------------------------------------------------------------------------
@@ -41,59 +50,32 @@ dependencies {
 project.description = 'Interfaces for modelling Abstract Syntax Notation (ASN.1)'
 project.ext.url = 'git@github.com:brightsparklabs/assam.git'
 project.ext.scm = 'scm:git@github.com:brightsparklabs/assam.git'
-project.group = 'com.brightsparklabs'
-project.version = getVersion()
-
-/**
- * Returns the latest tagged version from git using 'git describe'
- */
-String getVersion() {
-    def stdout = new ByteArrayOutputStream()
-    exec {
-        commandLine "git", "describe", "--dirty"
-        standardOutput = stdout
-    }
-    return stdout.toString().trim()
-}
 
 // -----------------------------------------------------------------------------
-// CREATE JAR FILE (via java-library-distribution)
+// PUBLISH ARTIFACTS (via bintray)
 // -----------------------------------------------------------------------------
 
-distributions {
-    main {
-        baseName = project.name
-    }
-}
-
-// -----------------------------------------------------------------------------
-// GENERATE CODE QUALITY REPORT (via findbugs)
-// -----------------------------------------------------------------------------
-tasks.withType(FindBugs) {
-    reports {
-        xml.enabled = false
-        html.enabled = true
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+    publications = ['Publication']
+    override = true
+    publish = true
+    pkg {
+        repo = 'maven'
+        name = project.name
+        userOrg = 'brightsparklabs'
+        licenses = ['MIT']
+        vcsUrl = project.ext.url
+        version {
+            name = project.version
+            vcsTag = project.version
+            released = new Date()
+        }
     }
 }
 
-// -----------------------------------------------------------------------------
-// GENERATE CODE COVERAGE REPORT (via jacoco)
-// -----------------------------------------------------------------------------
-
-jacocoTestReport {
-    reports {
-        html.enabled = true
-    }
-}
-
-// -----------------------------------------------------------------------------
-// PUBLISHING TO MAVEN CENTRAL (via maven and signing)
-// -----------------------------------------------------------------------------
-
-group = project.group
-archivesBaseName = project.name
-version = project.version
-
+// Include javadoc and sources (requirements for publishing to Maven Central)
 task javadocJar(type: Jar) {
     classifier = 'javadoc'
     from javadoc
@@ -104,56 +86,47 @@ task sourcesJar(type: Jar) {
     from sourceSets.main.allSource
 }
 
-artifacts {
-    archives javadocJar, sourcesJar
-}
+def pomConfig = {
+    name project.name
+    packaging 'jar'
+    description project.description
+    url project.url
 
-signing {
-    sign configurations.archives
-}
+    scm {
+        connection project.scm
+        developerConnection project.scm
+        url project.scm
+    }
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+    licenses {
+        license {
+            name 'MIT License'
+            url 'http://www.opensource.org/licenses/mit-license.php'
+        }
+    }
 
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-
-            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-
-            pom.project {
-                name project.name
-                packaging 'jar'
-                // optionally artifactId can be defined here
-                description project.description
-                url project.url
-
-                scm {
-                    connection project.scm
-                    developerConnection project.scm
-                    url project.scm
-                }
-
-                licenses {
-                    license {
-                        name 'MIT License'
-                        url 'http://www.opensource.org/licenses/mit-license.php'
-                    }
-                }
-
-                developers {
-                    developer {
-                        id 'brightsparklabs'
-                        name 'brightSPARK Labs'
-                        email 'enquire@brightsparklabs.com'
-                    }
-                }
-            }
+    developers {
+        developer {
+            id 'brightsparklabs'
+            name 'brightSPARK Labs'
+            email 'enquire@brightsparklabs.com'
         }
     }
 }
 
+publishing {
+    publications {
+        Publication(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+            groupId project.group
+            artifactId project.name
+            version project.version
+            pom.withXml {
+                def root = asNode()
+                root.children().last() + pomConfig
+            }
+        }
+    }
+}
