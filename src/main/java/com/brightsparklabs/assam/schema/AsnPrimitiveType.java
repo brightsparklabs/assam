@@ -1,6 +1,8 @@
 /*
- * Created by brightSPARK Labs
+ * Maintained by brightSPARK Labs.
  * www.brightsparklabs.com
+ *
+ * Refer to LICENSE at repository root for license details.
  */
 
 package com.brightsparklabs.assam.schema;
@@ -13,8 +15,7 @@ import com.brightsparklabs.assam.visitor.Visitable;
  *
  * @author brightSPARK Labs
  */
-public interface AsnPrimitiveType extends Visitable<AsnPrimitiveTypeVisitor<?>>
-{
+public interface AsnPrimitiveType extends Visitable<AsnPrimitiveTypeVisitor<?>> {
     // -------------------------------------------------------------------------
     // PUBLIC METHODS
     // -------------------------------------------------------------------------

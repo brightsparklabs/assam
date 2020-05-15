@@ -1,7 +1,10 @@
 /*
- * Created by brightSPARK Labs
+ * Maintained by brightSPARK Labs.
  * www.brightsparklabs.com
+ *
+ * Refer to LICENSE at repository root for license details.
  */
+
 package com.brightsparklabs.assam.validator;
 
 import com.brightsparklabs.assam.data.AsnData;
@@ -12,9 +15,7 @@ import com.google.common.collect.ImmutableSet;
  *
  * @author brightSPARK Labs
  */
-
-public interface ValidationResult
-{
+public interface ValidationResult {
     // -------------------------------------------------------------------------
     // PUBLIC METHODS
     // -------------------------------------------------------------------------
@@ -29,11 +30,9 @@ public interface ValidationResult
     /**
      * Determines whether failures occurred while validating the specified tag
      *
-     * @param tag
-     *         the tag of interest (e.g. "/Document/header/published/date")
-     *
+     * @param tag the tag of interest (e.g. "/Document/header/published/date")
      * @return {@code true} if failures occurred while validating the specified tag; {@code false}
-     * otherwise
+     *     otherwise
      */
     boolean hasFailures(String tag);
 
@@ -47,9 +46,7 @@ public interface ValidationResult
     /**
      * Returns all failures that occurred validating the specified tag
      *
-     * @param tag
-     *         the tag of interest (e.g. "/Document/header/published/date")
-     *
+     * @param tag the tag of interest (e.g. "/Document/header/published/date")
      * @return all failures that occurred validating the specified tag
      */
     ImmutableSet<ValidationFailure> getFailures(String tag);

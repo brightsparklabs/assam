@@ -1,7 +1,10 @@
 /*
- * Created by brightSPARK Labs
+ * Maintained by brightSPARK Labs.
  * www.brightsparklabs.com
+ *
+ * Refer to LICENSE at repository root for license details.
  */
+
 package com.brightsparklabs.assam.validator;
 
 /**
@@ -9,8 +12,7 @@ package com.brightsparklabs.assam.validator;
  *
  * @author brightSPARK Labs
  */
-public enum FailureType
-{
+public enum FailureType {
     /** data is not in the correct format */
     DataIncorrectlyFormatted,
     /** no data to validate */

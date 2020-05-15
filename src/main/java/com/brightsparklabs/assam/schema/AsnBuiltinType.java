@@ -1,6 +1,8 @@
 /*
- * Created by brightSPARK Labs
+ * Maintained by brightSPARK Labs.
  * www.brightsparklabs.com
+ *
+ * Refer to LICENSE at repository root for license details.
  */
 
 package com.brightsparklabs.assam.schema;
@@ -10,8 +12,7 @@ package com.brightsparklabs.assam.schema;
  *
  * @author brightSPARK Labs
  */
-public enum AsnBuiltinType
-{
+public enum AsnBuiltinType {
     BitString,
     BmpString,
     Boolean,

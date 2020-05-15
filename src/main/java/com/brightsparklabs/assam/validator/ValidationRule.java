@@ -1,7 +1,10 @@
 /*
- * Created by brightSPARK Labs
+ * Maintained by brightSPARK Labs.
  * www.brightsparklabs.com
+ *
+ * Refer to LICENSE at repository root for license details.
  */
+
 package com.brightsparklabs.assam.validator;
 
 import com.brightsparklabs.assam.data.AsnData;
@@ -13,8 +16,7 @@ import com.google.common.collect.ImmutableSet;
  *
  * @author brightSPARK Labs
  */
-public interface ValidationRule
-{
+public interface ValidationRule {
     // -------------------------------------------------------------------------
     // CONSTANTS
     // -------------------------------------------------------------------------
@@ -29,13 +31,9 @@ public interface ValidationRule
     /**
      * Validates the specified tag in the data
      *
-     * @param tag
-     *         tag to validate in the data
-     * @param asnData
-     *         data to validate
-     *
+     * @param tag tag to validate in the data
+     * @param asnData data to validate
      * @return the results of validation
-     *
      * @throws DecodeException if the specified tag could not be decoded.
      */
     ImmutableSet<ValidationFailure> validate(String tag, AsnData asnData) throws DecodeException;
@@ -49,8 +47,7 @@ public interface ValidationRule
      *
      * @author brightSPARK Labs
      */
-    class Null implements ValidationRule
-    {
+    class Null implements ValidationRule {
         // ---------------------------------------------------------------------
         // CONSTRUCTION
         // ---------------------------------------------------------------------
@@ -59,17 +56,14 @@ public interface ValidationRule
          * Default constructor. This is private, use {@link ValidationRule#NULL} to obtain an
          * instance
          */
-        private Null()
-        {
-        }
+        private Null() {}
 
         // ---------------------------------------------------------------------
         // IMPLEMENTATION: ValidationRule
         // ---------------------------------------------------------------------
 
         @Override
-        public ImmutableSet<ValidationFailure> validate(String tag, AsnData asnData)
-        {
+        public ImmutableSet<ValidationFailure> validate(String tag, AsnData asnData) {
             return ImmutableSet.of();
         }
     }
