@@ -10,8 +10,8 @@ package com.brightsparklabs.assam.validator;
 import com.brightsparklabs.assam.selector.Selector;
 
 /**
- * Combines a {@link Selector}, with the ability to provide a respective {@link Validator} if the selection criteria is
- * met.
+ * Combines a {@link Selector}, with the ability to provide a respective {@link Validator} if the
+ * selection criteria is met.
  *
  * @author brightSPARK Labs
  */
